@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20210115 10:09:45.053" generator="Robot 3.2.2 (Python 3.5.0 on linux)" rpa="false">
+<suite id="s1" source="/root/workspace/code" name="Code">
+<kw name="Start Xvfb and Open Browser" type="setup">
+<kw name="Start Virtual Display" library="XvfbLibrary">
+<status status="PASS" endtime="20210115 10:09:45.482" starttime="20210115 10:09:45.386"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+</arguments>
+<assign>
+<var>${chrome_options}</var>
+</assign>
+<msg timestamp="20210115 10:09:45.484" level="INFO">${chrome_options} = &lt;selenium.webdriver.chrome.options.Options object at 0x7fd24e54df60&gt;</msg>
+<status status="PASS" endtime="20210115 10:09:45.484" starttime="20210115 10:09:45.483"></status>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<arguments>
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>no-sandbox</arg>
+</arguments>
+<status status="PASS" endtime="20210115 10:09:45.485" starttime="20210115 10:09:45.484"></status>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<arguments>
+<arg>${chrome_options}</arg>
+<arg>to_capabilities</arg>
+</arguments>
+<assign>
+<var>${options}</var>
+</assign>
+<msg timestamp="20210115 10:09:45.485" level="INFO">${options} = {'goog:chromeOptions': {'extensions': [], 'args': ['no-sandbox']}, 'browserName': 'chrome', 'version': '', 'platform': 'ANY'}</msg>
+<status status="PASS" endtime="20210115 10:09:45.485" starttime="20210115 10:09:45.485"></status>
+</kw>
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>\</arg>
+<arg>browser=chrome</arg>
+<arg>desired_capabilities=${options}</arg>
+</arguments>
+<msg timestamp="20210115 10:09:45.486" level="INFO">Opening browser 'chrome' to base url ''.</msg>
+<status status="PASS" endtime="20210115 10:09:47.426" starttime="20210115 10:09:45.486"></status>
+</kw>
+<status status="PASS" endtime="20210115 10:09:47.427" starttime="20210115 10:09:45.385"></status>
+</kw>
+<suite id="s1-s1" source="/root/workspace/code/demo.robot" name="Demo">
+<test id="s1-s1-t1" name="Visit baidu.com and capture screenshot">
+<kw name="Go To" library="Selenium2Library">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>https://www.baidu.com</arg>
+</arguments>
+<msg timestamp="20210115 10:09:47.468" level="INFO">Opening url 'https://www.baidu.com'</msg>
+<status status="PASS" endtime="20210115 10:09:56.490" starttime="20210115 10:09:47.468"></status>
+</kw>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20210115 10:09:56.922" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20210115 10:09:56.922" starttime="20210115 10:09:56.490"></status>
+</kw>
+<tags>
+<tag>author-zichou</tag>
+<tag>size-sm</tag>
+</tags>
+<status status="PASS" endtime="20210115 10:09:56.923" starttime="20210115 10:09:47.459" critical="yes"></status>
+</test>
+<status status="PASS" endtime="20210115 10:09:56.925" starttime="20210115 10:09:47.427"></status>
+</suite>
+<kw name="Close Browser and Stop Xvfb" type="teardown">
+<kw name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20210115 10:09:57.028" starttime="20210115 10:09:56.931"></status>
+</kw>
+<kw name="Stop Virtual Display" library="XvfbLibrary">
+<status status="PASS" endtime="20210115 10:09:57.060" starttime="20210115 10:09:57.028"></status>
+</kw>
+<status status="PASS" endtime="20210115 10:09:57.061" starttime="20210115 10:09:56.930"></status>
+</kw>
+<status status="PASS" endtime="20210115 10:09:57.061" starttime="20210115 10:09:45.056"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0">author-zichou</stat>
+<stat pass="1" fail="0">size-sm</stat>
+</tag>
+<suite>
+<stat id="s1" pass="1" fail="0" name="Code">Code</stat>
+<stat id="s1-s1" pass="1" fail="0" name="Demo">Code.Demo</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

@@ -1,0 +1,33 @@
+---
+name: vcg-robotframework
+sign: vcg-robotframework
+description: vcg-robotframework
+image: registry.cn-beijing.aliyuncs.com/vcg-open/robotframework:1.0
+items:
+  - label: 执行命令
+    name: STEP_COMMAND
+    type: shell
+    value: |
+      # NOTE: output directory should be robot_logs
+      robot -L Trace -d robot_logs .
+  - label: 红线信息
+    name: CHECK_REDLINES
+    type: addable_group
+    rules:
+      - require: false
+    add_button:
+      type: icon
+      icon: plus
+      text: 增加红线
+      tip:
+        icon: question-circle
+        description: 红线校验失败步骤标记为失败
+    template:
+      items:
+        - name: redline
+          label: 红线
+          position: flat
+          type: custom_redline_dropdown
+          datamap: '[{"key": "PassRate", "type":"GE"}]'
+          rules:
+            -requires: false
